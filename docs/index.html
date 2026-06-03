@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="organização-das-variáveis" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Organização das variáveis</h1>
-<p>A amostra inicial incluiu 10.773 indivíduos. Foram excluídos 153 participantes com resposta “não se aplica” ou “não sabe/não respondeu” para anorexia e 2.176 indivíduos com menos de 60 anos de idade, resultando em uma amostra analítica final de 8.444 participantes.</p>
+<p>A amostra inicial incluiu 10.773 indivíduos. Foram excluídos 153 participantes com resposta “não se aplica” ou “não sabe/não respondeu” para risco de anorexia e 2.176 indivíduos com menos de 60 anos de idade, resultando em uma amostra analítica final de 8.444 participantes.</p>
 <section id="anorexia" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="anorexia"><span class="header-section-number">4.1</span> Anorexia</h2>
 <div class="cell">
@@ -436,12 +436,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(snaq_cat) <span class="sc">|&gt;</span></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  snaq_cat    n percentual
+1      &gt;14 7405       68.7
+2      ≤14 3215       29.8
+3     &lt;NA&gt;  153        1.4</code></pre>
+</div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Remover não se aplica ou não sabe/não respondeu (n = 153)</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(snaq_cat))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(snaq_cat))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -452,37 +458,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva idade</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>idade)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>idade <span class="sc">&lt;</span> <span class="dv">60</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>idade)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>idade <span class="sc">&lt;</span> <span class="dv">60</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Remover menor que 60 anos (n = 2176)</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(idade <span class="sc">&gt;=</span> <span class="dv">60</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(idade <span class="sc">&gt;=</span> <span class="dv">60</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar idade</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">faixa_etaria =</span> <span class="fu">cut</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      idade,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="cn">Inf</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"60–69"</span>, <span class="st">"70–79"</span>, <span class="st">"≥80"</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">faixa_etaria =</span> <span class="fu">cut</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      idade,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="cn">Inf</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"60–69"</span>, <span class="st">"70–79"</span>, <span class="st">"≥80"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva faixa etária</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(faixa_etaria) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(faixa_etaria) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  faixa_etaria    n percentual
@@ -497,28 +503,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva sexo</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>sexo, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>sexo, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Rótulos sexo</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> <span class="fu">factor</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      sexo,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Feminino"</span>, <span class="st">"Masculino"</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>      sexo,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Feminino"</span>, <span class="st">"Masculino"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva sexo com rótulos</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexo) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexo) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       sexo    n percentual
@@ -532,33 +538,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva cor/raça</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e9, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e9, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar cor/raça</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">raca_cor =</span> <span class="fu">case_when</span>(</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Branca"</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Preta"</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Parda"</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>) <span class="sc">~</span> <span class="cn">NA_character_</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">raca_cor =</span> <span class="fu">factor</span>(</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>      raca_cor,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Branca"</span>, <span class="st">"Preta"</span>, <span class="st">"Parda"</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">raca_cor =</span> <span class="fu">case_when</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Branca"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Preta"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Parda"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      e9 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>) <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">raca_cor =</span> <span class="fu">factor</span>(</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>      raca_cor,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Branca"</span>, <span class="st">"Preta"</span>, <span class="st">"Parda"</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva cor/raça categorizada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(raca_cor) <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(raca_cor) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  raca_cor    n percentual
@@ -574,33 +580,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva escolaridade</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e22, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e22, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar escolaridade</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">escolaridade =</span> <span class="fu">case_when</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="sc">~</span> <span class="st">"0–4 anos"</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">~</span> <span class="st">"5–8 anos"</span>,</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">18</span> <span class="sc">~</span> <span class="st">"≥9 anos"</span>,</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">==</span> <span class="dv">99</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">escolaridade =</span> <span class="fu">factor</span>(</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>      escolaridade,</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0–4 anos"</span>, <span class="st">"5–8 anos"</span>, <span class="st">"≥9 anos"</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">escolaridade =</span> <span class="fu">case_when</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="sc">~</span> <span class="st">"0–4 anos"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">~</span> <span class="st">"5–8 anos"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">%in%</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">18</span> <span class="sc">~</span> <span class="st">"≥9 anos"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      e22 <span class="sc">==</span> <span class="dv">99</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">escolaridade =</span> <span class="fu">factor</span>(</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>      escolaridade,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0–4 anos"</span>, <span class="st">"5–8 anos"</span>, <span class="st">"≥9 anos"</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva escolaridade categorizada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(escolaridade) <span class="sc">|&gt;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(escolaridade) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  escolaridade    n percentual
@@ -616,33 +622,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva estado civil</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e7, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>e7, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar estado civil</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_civil =</span> <span class="fu">factor</span>(</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        e7 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Casado ou união estável"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        e7 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Solteiro, divorciado ou viúvo"</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Casado ou união estável"</span>,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Solteiro, divorciado ou viúvo"</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_civil =</span> <span class="fu">factor</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        e7 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Casado ou união estável"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        e7 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="sc">~</span> <span class="st">"Solteiro, divorciado ou viúvo"</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Casado ou união estável"</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Solteiro, divorciado ou viúvo"</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva estado civil categorizado</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(estado_civil) <span class="sc">|&gt;</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(estado_civil) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   estado_civil    n percentual
@@ -656,38 +662,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva renda</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>rendadompc)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>rendadompc)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar renda</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">&lt;-</span> <span class="fu">quantile</span>(</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>rendadompc,</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>),</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">renda_tercil =</span> <span class="fu">cut</span>(</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>      rendadompc,</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, cortes, <span class="cn">Inf</span>),</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"1º tercil: ≤ R$ 1.168,89"</span>,</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"2º tercil: &gt; R$ 1.168,89 e ≤ R$ 1.500,00"</span>,</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"3º tercil: &gt; R$ 1.500,00"</span></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">&lt;-</span> <span class="fu">quantile</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>rendadompc,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">renda_tercil =</span> <span class="fu">cut</span>(</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>      rendadompc,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, cortes, <span class="cn">Inf</span>),</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"1º tercil: ≤ R$ 1.168,89"</span>,</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"2º tercil: &gt; R$ 1.168,89 e ≤ R$ 1.500,00"</span>,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"3º tercil: &gt; R$ 1.500,00"</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva renda categorizada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(renda_tercil) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(renda_tercil) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              renda_tercil    n percentual
@@ -703,33 +709,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva área</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>f1, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>f1, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Categorizar área</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">area =</span> <span class="fu">factor</span>(</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        f1 <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Rural"</span>,</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>        f1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Urbana"</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Rural"</span>,</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Urbana"</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">area =</span> <span class="fu">factor</span>(</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>        f1 <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Rural"</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>        f1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Urbana"</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Rural"</span>,</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Urbana"</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva área categorizada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(area) <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(area) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    area    n percentual
@@ -743,28 +749,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva região</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>regiao, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>regiao, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Rótulos região</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">regiao =</span> <span class="fu">factor</span>(</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>      regiao,</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Norte"</span>, <span class="st">"Nordeste"</span>, <span class="st">"Sudeste"</span>, <span class="st">"Sul"</span>, <span class="st">"Centro-Oeste"</span>)</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">regiao =</span> <span class="fu">factor</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>      regiao,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Norte"</span>, <span class="st">"Nordeste"</span>, <span class="st">"Sudeste"</span>, <span class="st">"Sul"</span>, <span class="st">"Centro-Oeste"</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Descritiva região com rótulos</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(regiao) <span class="sc">|&gt;</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(regiao) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentual =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">1</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        regiao    n percentual
@@ -783,39 +789,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Desenho amostral</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>desenho <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ids =</span> <span class="sc">~</span>upa,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">strata =</span> <span class="sc">~</span>estrato,</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="sc">~</span>peso_calibrado,</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nest =</span> <span class="cn">TRUE</span></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>desenho <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ids =</span> <span class="sc">~</span>upa,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">strata =</span> <span class="sc">~</span>estrato,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="sc">~</span>peso_calibrado,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nest =</span> <span class="cn">TRUE</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="prevalência-anorexia" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Prevalência anorexia</h1>
-<p>A prevalência de anorexia na população estudada foi de 4,7% (IC95%: 3,4–6,5).</p>
+<p>A prevalência do risco de anorexia na população estudada foi de 28,2% (IC95%: 24,4–32,4).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Prevalência anorexia</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>prev_anorexia <span class="ot">&lt;-</span> <span class="fu">svyciprop</span>(</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">I</span>(snaq_cat <span class="sc">==</span> <span class="st">"≤14"</span>),</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  desenho,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"logit"</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">coef</span>(prev_anorexia)[<span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">confint</span>(prev_anorexia) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Indicador =</span> <span class="st">"Risco de anorexia"</span>,</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(prev, <span class="dv">1</span>),</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"%.1f–%.1f"</span>,</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    ic[<span class="dv">1</span>],</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    ic[<span class="dv">2</span>]</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>prev_anorexia <span class="ot">&lt;-</span> <span class="fu">svyciprop</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">I</span>(snaq_cat <span class="sc">==</span> <span class="st">"≤14"</span>),</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  desenho,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"logit"</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">coef</span>(prev_anorexia)[<span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">confint</span>(prev_anorexia) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Indicador =</span> <span class="st">"Risco de anorexia"</span>,</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(prev, <span class="dv">1</span>),</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"%.1f–%.1f"</span>,</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>    ic[<span class="dv">1</span>],</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>    ic[<span class="dv">2</span>]</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -830,46 +836,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Tabela com dados ausentes</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    snaq_cat,</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    faixa_etaria,</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    sexo,</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    raca_cor,</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    escolaridade,</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    estado_civil,</span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    renda_tercil,</span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>    area,</span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    regiao</span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>      snaq_cat <span class="sc">~</span> <span class="st">"Risco de anorexia"</span>,</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>      faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>      sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>      raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>      escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>      estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>      renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>      area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
-<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>      regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
-<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">"always"</span>,</span>
-<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Ausente"</span></span>
-<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
-<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
-<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
-<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
-<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"**n (%)**"</span></span>
-<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(<span class="fu">everything</span>() <span class="sc">~</span> <span class="cn">NA</span>) <span class="sc">|&gt;</span></span>
-<span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
-<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 1. Características da amostra total e dados ausentes**"</span></span>
-<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    snaq_cat,</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    faixa_etaria,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    sexo,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    raca_cor,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    escolaridade,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    estado_civil,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    renda_tercil,</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    area,</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    regiao</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>      snaq_cat <span class="sc">~</span> <span class="st">"Risco de anorexia"</span>,</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>      faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>      sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>      raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>      escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>      estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>      renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>      area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>      regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">"{n} ({p}%)"</span>,</span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">"always"</span>,</span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Ausente"</span></span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"**n (%)**"</span></span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(<span class="fu">everything</span>() <span class="sc">~</span> <span class="cn">NA</span>) <span class="sc">|&gt;</span></span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
+<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 1. Características da amostra total e dados ausentes**"</span></span>
+<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="bekhwlcuot" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1528,62 +1534,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Tabela estratificada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_svysummary</span>(</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  desenho,</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> snaq_cat,</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">include =</span> <span class="fu">c</span>(</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    faixa_etaria,</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    sexo,</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    raca_cor,</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    escolaridade,</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    estado_civil,</span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    renda_tercil,</span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    area,</span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    regiao</span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>      sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>      raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>      escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>      estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
-<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>      renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
-<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>      area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
-<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>      regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
-<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistic =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">"{n_unweighted} ({p}%)"</span>,</span>
-<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"no"</span></span>
-<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">last =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>(</span>
-<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue_fun =</span> <span class="sc">~</span> <span class="fu">style_pvalue</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
-<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
-<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
-<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
-<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"**Total**"</span>,</span>
-<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>    stat_1 <span class="sc">~</span> <span class="st">"**Não**"</span>,</span>
-<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>    stat_2 <span class="sc">~</span> <span class="st">"**Sim**"</span>,</span>
-<span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"**p-valor**"</span></span>
-<span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(</span>
-<span id="cb52-44"><a href="#cb52-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(stat_1, stat_2) <span class="sc">~</span> <span class="st">"**Risco de anorexia**"</span></span>
-<span id="cb52-45"><a href="#cb52-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
-<span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span>,</span>
-<span id="cb52-48"><a href="#cb52-48" aria-hidden="true" tabindex="-1"></a>    stat_1 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span>,</span>
-<span id="cb52-49"><a href="#cb52-49" aria-hidden="true" tabindex="-1"></a>    stat_2 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span></span>
-<span id="cb52-50"><a href="#cb52-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb52-51"><a href="#cb52-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
-<span id="cb52-52"><a href="#cb52-52" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"Teste de Rao-Scott"</span></span>
-<span id="cb52-53"><a href="#cb52-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
-<span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 2. Características da amostra total e segundo risco de anorexia**"</span></span>
-<span id="cb52-56"><a href="#cb52-56" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_svysummary</span>(</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  desenho,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> snaq_cat,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">include =</span> <span class="fu">c</span>(</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    faixa_etaria,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    sexo,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    raca_cor,</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    escolaridade,</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    estado_civil,</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    renda_tercil,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    area,</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>    regiao</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>      sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>      raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>      escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>      estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>      renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>      area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>      regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistic =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">"{n_unweighted} ({p}%)"</span>,</span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"no"</span></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">last =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>(</span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue_fun =</span> <span class="sc">~</span> <span class="fu">style_pvalue</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
+<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"**Total**"</span>,</span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>    stat_1 <span class="sc">~</span> <span class="st">"**&gt;14**"</span>,</span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>    stat_2 <span class="sc">~</span> <span class="st">"**≤14**"</span>,</span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"**p-valor**"</span></span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(</span>
+<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(stat_1, stat_2) <span class="sc">~</span> <span class="st">"**Risco de anorexia**"</span></span>
+<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
+<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a>    stat_0 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span>,</span>
+<span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a>    stat_1 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span>,</span>
+<span id="cb53-49"><a href="#cb53-49" aria-hidden="true" tabindex="-1"></a>    stat_2 <span class="sc">~</span> <span class="st">"n não ponderado (% ponderada)"</span></span>
+<span id="cb53-50"><a href="#cb53-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-51"><a href="#cb53-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
+<span id="cb53-52"><a href="#cb53-52" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"Teste de Rao-Scott"</span></span>
+<span id="cb53-53"><a href="#cb53-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-54"><a href="#cb53-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
+<span id="cb53-55"><a href="#cb53-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 2. Características da amostra total e segundo risco de anorexia**"</span></span>
+<span id="cb53-56"><a href="#cb53-56" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="evhtuchofw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2055,8 +2061,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th rowspan="2" id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-valor</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
 </tr>
 <tr class="gt_col_headings even">
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Não</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Sim</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>&gt;14</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>≤14</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -2344,90 +2350,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Tabela prevalência</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>calc_prev <span class="ot">&lt;-</span> <span class="cf">function</span>(var, label, desenho) {</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  prev <span class="ot">&lt;-</span> <span class="fu">svyby</span>(</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">I</span>(snaq_cat <span class="sc">==</span> <span class="st">"≤14"</span>),</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"~"</span>, var)),</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    desenho,</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    svyciprop,</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span> <span class="st">"ci"</span>,</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"logit"</span>,</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  p_val <span class="ot">&lt;-</span> <span class="fu">svychisq</span>(</span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"~n73_6 + "</span>, var)),</span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>    desenho</span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>p.value</span>
-<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  categoria <span class="ot">&lt;-</span> <span class="fu">as.character</span>(prev[[var]])</span>
-<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
-<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">c</span>(label, <span class="fu">paste0</span>(<span class="st">"  "</span>, categoria)),</span>
-<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">""</span>,</span>
-<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, <span class="dv">100</span> <span class="sc">*</span> prev[[<span class="dv">2</span>]])</span>
-<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">""</span>,</span>
-<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sprintf</span>(</span>
-<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%.1f–%.1f"</span>,</span>
-<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span> <span class="sc">*</span> prev<span class="sc">$</span>ci_l,</span>
-<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span> <span class="sc">*</span> prev<span class="sc">$</span>ci_u</span>
-<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">p-valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format.pval</span>(</span>
-<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>        p_val,</span>
-<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">eps =</span> <span class="fl">0.001</span></span>
-<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="st">""</span>, <span class="fu">length</span>(categoria))</span>
-<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">grupo =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="fu">length</span>(categoria)))</span>
-<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>var            , <span class="sc">~</span>label                                 ,</span>
-<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"faixa_etaria"</span>  , <span class="st">"Faixa etária"</span>                         ,</span>
-<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sexo"</span>          , <span class="st">"Sexo"</span>                                 ,</span>
-<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"raca_cor"</span>      , <span class="st">"Raça/cor"</span>                             ,</span>
-<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">"escolaridade"</span>  , <span class="st">"Escolaridade"</span>                         ,</span>
-<span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"estado_civil"</span>  , <span class="st">"Estado civil"</span>                         ,</span>
-<span id="cb53-49"><a href="#cb53-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"renda_tercil"</span>  , <span class="st">"Renda domiciliar per capita (tercis)"</span> ,</span>
-<span id="cb53-50"><a href="#cb53-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">"area"</span>          , <span class="st">"Área de residência"</span>                   ,</span>
-<span id="cb53-51"><a href="#cb53-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"regiao"</span>        , <span class="st">"Macrorregião geográfica"</span></span>
-<span id="cb53-52"><a href="#cb53-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb53-53"><a href="#cb53-53" aria-hidden="true" tabindex="-1"></a>tab_prev <span class="ot">&lt;-</span> <span class="fu">map2_dfr</span>(</span>
-<span id="cb53-54"><a href="#cb53-54" aria-hidden="true" tabindex="-1"></a>  vars<span class="sc">$</span>var,</span>
-<span id="cb53-55"><a href="#cb53-55" aria-hidden="true" tabindex="-1"></a>  vars<span class="sc">$</span>label,</span>
-<span id="cb53-56"><a href="#cb53-56" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">calc_prev</span>(.x, .y, desenho)</span>
-<span id="cb53-57"><a href="#cb53-57" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb53-58"><a href="#cb53-58" aria-hidden="true" tabindex="-1"></a>tab_prev <span class="sc">|&gt;</span></span>
-<span id="cb53-59"><a href="#cb53-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb53-60"><a href="#cb53-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb53-61"><a href="#cb53-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(</span>
-<span id="cb53-62"><a href="#cb53-62" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Tabela 3. Prevalência do risco de anorexia segundo características sociodemográficas**"</span></span>
-<span id="cb53-63"><a href="#cb53-63" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb53-64"><a href="#cb53-64" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb53-65"><a href="#cb53-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb53-66"><a href="#cb53-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">md</span>(<span class="st">"**Características**"</span>),</span>
-<span id="cb53-67"><a href="#cb53-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**Prevalência (%)**"</span>),</span>
-<span id="cb53-68"><a href="#cb53-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**IC95%**"</span>),</span>
-<span id="cb53-69"><a href="#cb53-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">p-valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**p-valor**"</span>)</span>
-<span id="cb53-70"><a href="#cb53-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb53-71"><a href="#cb53-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(</span>
-<span id="cb53-72"><a href="#cb53-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>,</span>
-<span id="cb53-73"><a href="#cb53-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span></span>
-<span id="cb53-74"><a href="#cb53-74" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb53-75"><a href="#cb53-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb53-76"><a href="#cb53-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb53-77"><a href="#cb53-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb53-78"><a href="#cb53-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> Caracteristica,</span>
-<span id="cb53-79"><a href="#cb53-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> grupo</span>
-<span id="cb53-80"><a href="#cb53-80" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb53-81"><a href="#cb53-81" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb53-82"><a href="#cb53-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_hide</span>(</span>
-<span id="cb53-83"><a href="#cb53-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> grupo</span>
-<span id="cb53-84"><a href="#cb53-84" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>calc_prev <span class="ot">&lt;-</span> <span class="cf">function</span>(var, label, desenho) {</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  prev <span class="ot">&lt;-</span> <span class="fu">svyby</span>(</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">I</span>(snaq_cat <span class="sc">==</span> <span class="st">"≤14"</span>),</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"~"</span>, var)),</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    desenho,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    svyciprop,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span> <span class="st">"ci"</span>,</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"logit"</span>,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  p_val <span class="ot">&lt;-</span> <span class="fu">svychisq</span>(</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"~n73_6 + "</span>, var)),</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>    desenho</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>p.value</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  categoria <span class="ot">&lt;-</span> <span class="fu">as.character</span>(prev[[var]])</span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">c</span>(label, <span class="fu">paste0</span>(<span class="st">"  "</span>, categoria)),</span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">""</span>,</span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, <span class="dv">100</span> <span class="sc">*</span> prev[[<span class="dv">2</span>]])</span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">""</span>,</span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sprintf</span>(</span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%.1f–%.1f"</span>,</span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span> <span class="sc">*</span> prev<span class="sc">$</span>ci_l,</span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span> <span class="sc">*</span> prev<span class="sc">$</span>ci_u</span>
+<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">p-valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format.pval</span>(</span>
+<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a>        p_val,</span>
+<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">eps =</span> <span class="fl">0.001</span></span>
+<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="st">""</span>, <span class="fu">length</span>(categoria))</span>
+<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">grupo =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="fu">length</span>(categoria)))</span>
+<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>var            , <span class="sc">~</span>label                                 ,</span>
+<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"faixa_etaria"</span>  , <span class="st">"Faixa etária"</span>                         ,</span>
+<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sexo"</span>          , <span class="st">"Sexo"</span>                                 ,</span>
+<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"raca_cor"</span>      , <span class="st">"Raça/cor"</span>                             ,</span>
+<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">"escolaridade"</span>  , <span class="st">"Escolaridade"</span>                         ,</span>
+<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"estado_civil"</span>  , <span class="st">"Estado civil"</span>                         ,</span>
+<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"renda_tercil"</span>  , <span class="st">"Renda domiciliar per capita (tercis)"</span> ,</span>
+<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">"area"</span>          , <span class="st">"Área de residência"</span>                   ,</span>
+<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">"regiao"</span>        , <span class="st">"Macrorregião geográfica"</span></span>
+<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a>tab_prev <span class="ot">&lt;-</span> <span class="fu">map2_dfr</span>(</span>
+<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a>  vars<span class="sc">$</span>var,</span>
+<span id="cb54-55"><a href="#cb54-55" aria-hidden="true" tabindex="-1"></a>  vars<span class="sc">$</span>label,</span>
+<span id="cb54-56"><a href="#cb54-56" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">calc_prev</span>(.x, .y, desenho)</span>
+<span id="cb54-57"><a href="#cb54-57" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-58"><a href="#cb54-58" aria-hidden="true" tabindex="-1"></a>tab_prev <span class="sc">|&gt;</span></span>
+<span id="cb54-59"><a href="#cb54-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb54-60"><a href="#cb54-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb54-61"><a href="#cb54-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(</span>
+<span id="cb54-62"><a href="#cb54-62" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Tabela 3. Prevalência do risco de anorexia segundo características sociodemográficas**"</span></span>
+<span id="cb54-63"><a href="#cb54-63" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb54-64"><a href="#cb54-64" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb54-65"><a href="#cb54-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb54-66"><a href="#cb54-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">md</span>(<span class="st">"**Características**"</span>),</span>
+<span id="cb54-67"><a href="#cb54-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**Prevalência (%)**"</span>),</span>
+<span id="cb54-68"><a href="#cb54-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">IC95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**IC95%**"</span>),</span>
+<span id="cb54-69"><a href="#cb54-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">p-valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">md</span>(<span class="st">"**p-valor**"</span>)</span>
+<span id="cb54-70"><a href="#cb54-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb54-71"><a href="#cb54-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(</span>
+<span id="cb54-72"><a href="#cb54-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>,</span>
+<span id="cb54-73"><a href="#cb54-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">Prevalência (%)</span><span class="st">`</span></span>
+<span id="cb54-74"><a href="#cb54-74" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb54-75"><a href="#cb54-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb54-76"><a href="#cb54-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb54-77"><a href="#cb54-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb54-78"><a href="#cb54-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> Caracteristica,</span>
+<span id="cb54-79"><a href="#cb54-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> grupo</span>
+<span id="cb54-80"><a href="#cb54-80" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb54-81"><a href="#cb54-81" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb54-82"><a href="#cb54-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_hide</span>(</span>
+<span id="cb54-83"><a href="#cb54-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> grupo</span>
+<span id="cb54-84"><a href="#cb54-84" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="cezprajowk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3091,114 +3097,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Tabela univariada</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"faixa_etaria"</span>,</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sexo"</span>,</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"raca_cor"</span>,</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"escolaridade"</span>,</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"estado_civil"</span>,</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"renda_tercil"</span>,</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"area"</span>,</span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"regiao"</span></span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">faixa_etaria =</span> <span class="st">"Faixa etária"</span>,</span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="st">"Sexo"</span>,</span>
-<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">raca_cor =</span> <span class="st">"Raça/cor"</span>,</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">escolaridade =</span> <span class="st">"Escolaridade"</span>,</span>
-<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">estado_civil =</span> <span class="st">"Estado civil"</span>,</span>
-<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">renda_tercil =</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
-<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> <span class="st">"Área de residência"</span>,</span>
-<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">regiao =</span> <span class="st">"Macrorregião geográfica"</span></span>
-<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>resultado_uni <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(vars, <span class="cf">function</span>(v) {</span>
-<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>  modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
-<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(</span>
-<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"snaq_cat ~ "</span>, v)</span>
-<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">design =</span> desenho,</span>
-<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
-<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a>  p_global <span class="ot">&lt;-</span> <span class="fu">regTermTest</span>(</span>
-<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a>    modelo,</span>
-<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(</span>
-<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"~"</span>, v)</span>
-<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>p</span>
-<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">tidy</span>(</span>
-<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>    modelo,</span>
-<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">exponentiate =</span> <span class="cn">TRUE</span></span>
-<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>)</span>
-<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a>  ref <span class="ot">&lt;-</span> <span class="fu">levels</span>(df[[v]])[<span class="dv">1</span>]</span>
-<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
-<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
-<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> labels[[v]],</span>
-<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="st">""</span>,</span>
-<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>        p_global <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
-<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;0.001"</span>,</span>
-<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, p_global)</span>
-<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> p_global <span class="sc">&lt;</span> <span class="fl">0.20</span></span>
-<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
-<span id="cb54-55"><a href="#cb54-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> <span class="fu">paste0</span>(<span class="st">"  "</span>, ref, <span class="st">" (ref.)"</span>),</span>
-<span id="cb54-56"><a href="#cb54-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="st">"1.00"</span>,</span>
-<span id="cb54-57"><a href="#cb54-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="st">""</span>,</span>
-<span id="cb54-58"><a href="#cb54-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> <span class="cn">FALSE</span></span>
-<span id="cb54-59"><a href="#cb54-59" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb54-60"><a href="#cb54-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
-<span id="cb54-61"><a href="#cb54-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> <span class="fu">paste0</span>(</span>
-<span id="cb54-62"><a href="#cb54-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"  "</span>,</span>
-<span id="cb54-63"><a href="#cb54-63" aria-hidden="true" tabindex="-1"></a>        <span class="fu">gsub</span>(</span>
-<span id="cb54-64"><a href="#cb54-64" aria-hidden="true" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">"^"</span>, v),</span>
-<span id="cb54-65"><a href="#cb54-65" aria-hidden="true" tabindex="-1"></a>          <span class="st">""</span>,</span>
-<span id="cb54-66"><a href="#cb54-66" aria-hidden="true" tabindex="-1"></a>          res<span class="sc">$</span>term</span>
-<span id="cb54-67"><a href="#cb54-67" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb54-68"><a href="#cb54-68" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb54-69"><a href="#cb54-69" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="fu">sprintf</span>(</span>
-<span id="cb54-70"><a href="#cb54-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%.2f (%.2f–%.2f)"</span>,</span>
-<span id="cb54-71"><a href="#cb54-71" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>estimate,</span>
-<span id="cb54-72"><a href="#cb54-72" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>conf.low,</span>
-<span id="cb54-73"><a href="#cb54-73" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>conf.high</span>
-<span id="cb54-74"><a href="#cb54-74" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb54-75"><a href="#cb54-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="st">""</span>,</span>
-<span id="cb54-76"><a href="#cb54-76" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> <span class="cn">FALSE</span></span>
-<span id="cb54-77"><a href="#cb54-77" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-78"><a href="#cb54-78" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb54-79"><a href="#cb54-79" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb54-80"><a href="#cb54-80" aria-hidden="true" tabindex="-1"></a>resultado_uni <span class="sc">|&gt;</span></span>
-<span id="cb54-81"><a href="#cb54-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb54-82"><a href="#cb54-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb54-83"><a href="#cb54-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(</span>
-<span id="cb54-84"><a href="#cb54-84" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Tabela 4. Regressão logística univariada para risco de anorexia**"</span></span>
-<span id="cb54-85"><a href="#cb54-85" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-86"><a href="#cb54-86" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb54-87"><a href="#cb54-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb54-88"><a href="#cb54-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">md</span>(<span class="st">"**Características**"</span>),</span>
-<span id="cb54-89"><a href="#cb54-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">OR_IC95 =</span> <span class="fu">md</span>(<span class="st">"**OR bruta (IC95%)**"</span>),</span>
-<span id="cb54-90"><a href="#cb54-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_valor =</span> <span class="fu">md</span>(<span class="st">"**p-valor**"</span>)</span>
-<span id="cb54-91"><a href="#cb54-91" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb54-92"><a href="#cb54-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb54-93"><a href="#cb54-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb54-94"><a href="#cb54-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb54-95"><a href="#cb54-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> Caracteristica,</span>
-<span id="cb54-96"><a href="#cb54-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> OR_IC95 <span class="sc">==</span> <span class="st">""</span></span>
-<span id="cb54-97"><a href="#cb54-97" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-98"><a href="#cb54-98" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb54-99"><a href="#cb54-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb54-100"><a href="#cb54-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb54-101"><a href="#cb54-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb54-102"><a href="#cb54-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> p_valor,</span>
-<span id="cb54-103"><a href="#cb54-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> destaque</span>
-<span id="cb54-104"><a href="#cb54-104" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-105"><a href="#cb54-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb54-106"><a href="#cb54-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_hide</span>(</span>
-<span id="cb54-107"><a href="#cb54-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> destaque</span>
-<span id="cb54-108"><a href="#cb54-108" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"faixa_etaria"</span>,</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sexo"</span>,</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"raca_cor"</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"escolaridade"</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"estado_civil"</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"renda_tercil"</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"area"</span>,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"regiao"</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">faixa_etaria =</span> <span class="st">"Faixa etária"</span>,</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">raca_cor =</span> <span class="st">"Raça/cor"</span>,</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">escolaridade =</span> <span class="st">"Escolaridade"</span>,</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">estado_civil =</span> <span class="st">"Estado civil"</span>,</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">renda_tercil =</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> <span class="st">"Área de residência"</span>,</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">regiao =</span> <span class="st">"Macrorregião geográfica"</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>resultado_uni <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(vars, <span class="cf">function</span>(v) {</span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>  modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"snaq_cat ~ "</span>, v)</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">design =</span> desenho,</span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a>  p_global <span class="ot">&lt;-</span> <span class="fu">regTermTest</span>(</span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a>    modelo,</span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.formula</span>(</span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"~"</span>, v)</span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>p</span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">tidy</span>(</span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>    modelo,</span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">exponentiate =</span> <span class="cn">TRUE</span></span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>)</span>
+<span id="cb55-42"><a href="#cb55-42" aria-hidden="true" tabindex="-1"></a>  ref <span class="ot">&lt;-</span> <span class="fu">levels</span>(df[[v]])[<span class="dv">1</span>]</span>
+<span id="cb55-43"><a href="#cb55-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb55-44"><a href="#cb55-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb55-45"><a href="#cb55-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> labels[[v]],</span>
+<span id="cb55-46"><a href="#cb55-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="st">""</span>,</span>
+<span id="cb55-47"><a href="#cb55-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb55-48"><a href="#cb55-48" aria-hidden="true" tabindex="-1"></a>        p_global <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
+<span id="cb55-49"><a href="#cb55-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;0.001"</span>,</span>
+<span id="cb55-50"><a href="#cb55-50" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, p_global)</span>
+<span id="cb55-51"><a href="#cb55-51" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb55-52"><a href="#cb55-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> p_global <span class="sc">&lt;</span> <span class="fl">0.20</span></span>
+<span id="cb55-53"><a href="#cb55-53" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb55-54"><a href="#cb55-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb55-55"><a href="#cb55-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> <span class="fu">paste0</span>(<span class="st">"  "</span>, ref, <span class="st">" (ref.)"</span>),</span>
+<span id="cb55-56"><a href="#cb55-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="st">"1.00"</span>,</span>
+<span id="cb55-57"><a href="#cb55-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="st">""</span>,</span>
+<span id="cb55-58"><a href="#cb55-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> <span class="cn">FALSE</span></span>
+<span id="cb55-59"><a href="#cb55-59" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb55-60"><a href="#cb55-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb55-61"><a href="#cb55-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">Caracteristica =</span> <span class="fu">paste0</span>(</span>
+<span id="cb55-62"><a href="#cb55-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"  "</span>,</span>
+<span id="cb55-63"><a href="#cb55-63" aria-hidden="true" tabindex="-1"></a>        <span class="fu">gsub</span>(</span>
+<span id="cb55-64"><a href="#cb55-64" aria-hidden="true" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">"^"</span>, v),</span>
+<span id="cb55-65"><a href="#cb55-65" aria-hidden="true" tabindex="-1"></a>          <span class="st">""</span>,</span>
+<span id="cb55-66"><a href="#cb55-66" aria-hidden="true" tabindex="-1"></a>          res<span class="sc">$</span>term</span>
+<span id="cb55-67"><a href="#cb55-67" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb55-68"><a href="#cb55-68" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb55-69"><a href="#cb55-69" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR_IC95 =</span> <span class="fu">sprintf</span>(</span>
+<span id="cb55-70"><a href="#cb55-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%.2f (%.2f–%.2f)"</span>,</span>
+<span id="cb55-71"><a href="#cb55-71" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>estimate,</span>
+<span id="cb55-72"><a href="#cb55-72" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>conf.low,</span>
+<span id="cb55-73"><a href="#cb55-73" aria-hidden="true" tabindex="-1"></a>        res<span class="sc">$</span>conf.high</span>
+<span id="cb55-74"><a href="#cb55-74" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb55-75"><a href="#cb55-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_valor =</span> <span class="st">""</span>,</span>
+<span id="cb55-76"><a href="#cb55-76" aria-hidden="true" tabindex="-1"></a>      <span class="at">destaque =</span> <span class="cn">FALSE</span></span>
+<span id="cb55-77"><a href="#cb55-77" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-78"><a href="#cb55-78" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb55-79"><a href="#cb55-79" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb55-80"><a href="#cb55-80" aria-hidden="true" tabindex="-1"></a>resultado_uni <span class="sc">|&gt;</span></span>
+<span id="cb55-81"><a href="#cb55-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb55-82"><a href="#cb55-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb55-83"><a href="#cb55-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(</span>
+<span id="cb55-84"><a href="#cb55-84" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Tabela 4. Regressão logística univariada para risco de anorexia**"</span></span>
+<span id="cb55-85"><a href="#cb55-85" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-86"><a href="#cb55-86" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-87"><a href="#cb55-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb55-88"><a href="#cb55-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">Caracteristica =</span> <span class="fu">md</span>(<span class="st">"**Características**"</span>),</span>
+<span id="cb55-89"><a href="#cb55-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">OR_IC95 =</span> <span class="fu">md</span>(<span class="st">"**OR bruta (IC95%)**"</span>),</span>
+<span id="cb55-90"><a href="#cb55-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_valor =</span> <span class="fu">md</span>(<span class="st">"**p-valor**"</span>)</span>
+<span id="cb55-91"><a href="#cb55-91" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-92"><a href="#cb55-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb55-93"><a href="#cb55-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb55-94"><a href="#cb55-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb55-95"><a href="#cb55-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> Caracteristica,</span>
+<span id="cb55-96"><a href="#cb55-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> OR_IC95 <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb55-97"><a href="#cb55-97" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-98"><a href="#cb55-98" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-99"><a href="#cb55-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb55-100"><a href="#cb55-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> p_valor,</span>
+<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> destaque</span>
+<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-105"><a href="#cb55-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-106"><a href="#cb55-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_hide</span>(</span>
+<span id="cb55-107"><a href="#cb55-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> destaque</span>
+<span id="cb55-108"><a href="#cb55-108" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="hflegnmwyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3832,20 +3838,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Modelo completo</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>mod_final <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  snaq_cat <span class="sc">~</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">+</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">+</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">+</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">+</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">+</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">+</span></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">+</span></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    regiao,</span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> desenho,</span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_final)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>mod_final <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  snaq_cat <span class="sc">~</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">+</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">+</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">+</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">+</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    regiao,</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> desenho,</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_final)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -3902,7 +3908,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <details class="code-fold">
 <summary>Modelo completo</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod_final)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod_final)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 GVIF Df GVIF^(1/(2*Df))
@@ -3922,58 +3928,58 @@ regiao       2.438928  4        1.117892</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Tabela completa</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>mod_final <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  snaq_cat <span class="sc">~</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">+</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">+</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">+</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">+</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">+</span></span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">+</span></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">+</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>    regiao,</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> desenho,</span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(</span>
-<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>  mod_final,</span>
-<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">add_estimate_to_reference_rows =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
-<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
-<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
-<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
-<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
-<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
-<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>    regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
-<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate_fun =</span> <span class="sc">~</span> <span class="fu">style_number</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>),</span>
-<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">pvalue_fun =</span> <span class="sc">~</span> <span class="fu">style_pvalue</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
-<span id="cb59-34"><a href="#cb59-34" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
-<span id="cb59-35"><a href="#cb59-35" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
-<span id="cb59-36"><a href="#cb59-36" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb59-37"><a href="#cb59-37" aria-hidden="true" tabindex="-1"></a>    estimate <span class="sc">~</span> <span class="st">"**OR ajustada**"</span>,</span>
-<span id="cb59-38"><a href="#cb59-38" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"**p-valor**"</span></span>
-<span id="cb59-39"><a href="#cb59-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb59-40"><a href="#cb59-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
-<span id="cb59-41"><a href="#cb59-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 5. Associação entre características sociodemográficas e risco de anorexia**"</span></span>
-<span id="cb59-42"><a href="#cb59-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb59-43"><a href="#cb59-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
-<span id="cb59-44"><a href="#cb59-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">everything</span>() <span class="sc">~</span> <span class="cn">NA</span></span>
-<span id="cb59-45"><a href="#cb59-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb59-46"><a href="#cb59-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
-<span id="cb59-47"><a href="#cb59-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb59-48"><a href="#cb59-48" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_source_note</span>(</span>
-<span id="cb59-49"><a href="#cb59-49" aria-hidden="true" tabindex="-1"></a>    gt<span class="sc">::</span><span class="fu">md</span>(</span>
-<span id="cb59-50"><a href="#cb59-50" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OR ajustada obtida por regressão logística considerando simultaneamente faixa etária, sexo, raça/cor, escolaridade, estado civil, renda domiciliar per capita, área de residência e macrorregião geográfica."</span></span>
-<span id="cb59-51"><a href="#cb59-51" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb59-52"><a href="#cb59-52" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>mod_final <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  snaq_cat <span class="sc">~</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">+</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">+</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">+</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">+</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">+</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">+</span></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">+</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>    regiao,</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> desenho,</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasibinomial</span>()</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(</span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>  mod_final,</span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">add_estimate_to_reference_rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>    faixa_etaria <span class="sc">~</span> <span class="st">"Faixa etária"</span>,</span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>    sexo <span class="sc">~</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>    raca_cor <span class="sc">~</span> <span class="st">"Raça/cor"</span>,</span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>    escolaridade <span class="sc">~</span> <span class="st">"Escolaridade"</span>,</span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>    estado_civil <span class="sc">~</span> <span class="st">"Estado civil"</span>,</span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>    renda_tercil <span class="sc">~</span> <span class="st">"Renda domiciliar per capita (tercis)"</span>,</span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>    area <span class="sc">~</span> <span class="st">"Área de residência"</span>,</span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>    regiao <span class="sc">~</span> <span class="st">"Macrorregião geográfica"</span></span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate_fun =</span> <span class="sc">~</span> <span class="fu">style_number</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">pvalue_fun =</span> <span class="sc">~</span> <span class="fu">style_pvalue</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb60-33"><a href="#cb60-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb60-34"><a href="#cb60-34" aria-hidden="true" tabindex="-1"></a>    label <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb60-35"><a href="#cb60-35" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"</span></span>
+<span id="cb60-36"><a href="#cb60-36" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb60-37"><a href="#cb60-37" aria-hidden="true" tabindex="-1"></a>    estimate <span class="sc">~</span> <span class="st">"**OR ajustada**"</span>,</span>
+<span id="cb60-38"><a href="#cb60-38" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">~</span> <span class="st">"**p-valor**"</span></span>
+<span id="cb60-39"><a href="#cb60-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb60-40"><a href="#cb60-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(</span>
+<span id="cb60-41"><a href="#cb60-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"**Tabela 5. Associação entre características sociodemográficas e risco de anorexia**"</span></span>
+<span id="cb60-42"><a href="#cb60-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb60-43"><a href="#cb60-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_footnote</span>(</span>
+<span id="cb60-44"><a href="#cb60-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">everything</span>() <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb60-45"><a href="#cb60-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb60-46"><a href="#cb60-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb60-48"><a href="#cb60-48" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_source_note</span>(</span>
+<span id="cb60-49"><a href="#cb60-49" aria-hidden="true" tabindex="-1"></a>    gt<span class="sc">::</span><span class="fu">md</span>(</span>
+<span id="cb60-50"><a href="#cb60-50" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OR ajustada obtida por regressão logística considerando simultaneamente faixa etária, sexo, raça/cor, escolaridade, estado civil, renda domiciliar per capita, área de residência e macrorregião geográfica."</span></span>
+<span id="cb60-51"><a href="#cb60-51" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb60-52"><a href="#cb60-52" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="jrqrrgmqxu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">

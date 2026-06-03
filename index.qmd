@@ -69,7 +69,7 @@ df <- read.csv("ELSI Portugues (3a onda).csv")
 
 # Organização das variáveis
 
-A amostra inicial incluiu 10.773 indivíduos. Foram excluídos 153 participantes com resposta "não se aplica" ou "não sabe/não respondeu" para anorexia e 2.176 indivíduos com menos de 60 anos de idade, resultando em uma amostra analítica final de 8.444 participantes.
+A amostra inicial incluiu 10.773 indivíduos. Foram excluídos 153 participantes com resposta "não se aplica" ou "não sabe/não respondeu" para risco de anorexia e 2.176 indivíduos com menos de 60 anos de idade, resultando em uma amostra analítica final de 8.444 participantes.
 
 
 ## Anorexia
@@ -177,7 +177,6 @@ df |>
 ```{r}
 #| label: Descritiva anorexia
 #| code-summary: Descritiva anorexia
-#| results: hide
 df <- df |>
   mutate(
     snaq = rowSums(
@@ -510,7 +509,7 @@ desenho <- svydesign(
 
 # Prevalência anorexia
 
-A prevalência de anorexia na população estudada foi de 4,7% (IC95%: 3,4–6,5).
+A prevalência do risco de anorexia na população estudada foi de 28,2% (IC95%: 24,4–32,4).
 
 ```{r}
 #| label: Prevalência anorexia
@@ -627,8 +626,8 @@ tbl_svysummary(
       "**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"
     ),
     stat_0 ~ "**Total**",
-    stat_1 ~ "**Não**",
-    stat_2 ~ "**Sim**",
+    stat_1 ~ "**>14**",
+    stat_2 ~ "**≤14**",
     p.value ~ "**p-valor**"
   ) |>
   modify_spanning_header(
