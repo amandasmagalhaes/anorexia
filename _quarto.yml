@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Anorexia"
+
+lang: pt-BR
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    code-fold: true
+    smooth-scroll: true
+    anchor-sections: true
+    page-layout: full
+
+execute:
+  freeze: auto
+  cache: true
+  warning: false
+  message: false
