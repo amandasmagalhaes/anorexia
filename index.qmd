@@ -200,8 +200,8 @@ df |>
 ```
 
 ```{r}
-#| label: Remover "não se aplica" ou "não sabe/não respondeu" (n = 153)
-#| code-summary: Remover "não se aplica" ou "não sabe/não respondeu" (n = 153)
+#| label: Remover não se aplica ou não sabe/não respondeu (n = 153)
+#| code-summary: Remover não se aplica ou não sabe/não respondeu (n = 153)
 df <- df |>
   filter(!is.na(snaq_cat))
 ```
