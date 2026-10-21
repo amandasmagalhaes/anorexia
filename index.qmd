@@ -736,6 +736,9 @@ tab_prev |>
   ) |>
   cols_hide(
     columns = grupo
+  ) |>
+  tab_source_note(
+    source_note = md("Teste de significância: qui-quadrado de Rao–Scott.")
   )
 ```
 
@@ -901,6 +904,7 @@ mod_final <- svyglm(
   design = desenho,
   family = quasibinomial()
 )
+n_final <- nrow(model.frame(mod_final))
 
 tbl_regression(
   mod_final,
@@ -921,7 +925,7 @@ tbl_regression(
 ) |>
   modify_header(
     label ~ glue::glue(
-      "**Características (n = {format(nrow(df), big.mark = '.', decimal.mark = ',')})**"
+      "**Características (n = {format(n_final, big.mark = '.', decimal.mark = ',')})**"
     ),
     estimate ~ "**OR ajustada**",
     p.value ~ "**p-valor**"
