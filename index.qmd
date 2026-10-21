@@ -34,12 +34,6 @@ rm(list = ls())
 ```
 
 ```{r}
-#| label: Diretório
-#| code-summary: Diretório
-setwd("C:/Users/amand/Amanda/GitHub/inseguranca_alimentar")
-```
-
-```{r}
 #| label: Bibliotecas
 #| code-summary: Bibliotecas
 pacman::p_load(
